@@ -1,2 +1,2 @@
-# python_junior_interview_faqs
+# python_interview_faqs
 Most popular questions for junior Python developers on the interview
