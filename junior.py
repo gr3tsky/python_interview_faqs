@@ -130,7 +130,7 @@ print(new_addr) #3770336   <-адрес новой ячейки памяти
 #list
 list = [1, 2, 3]
 old_addr = id(list)
-list[0] = 4
+list[0] = 4 #[4, 2, 3]
 new_addr = id(list)
 print(old_addr) #139991941772216   <-адрес старой ячейки памяти
 print(new_addr) #139991941772216   <-адрес новой ячейки памяти
@@ -139,19 +139,70 @@ print(new_addr) #139991941772216   <-адрес новой ячейки памя
 #bytearray
 #user-defined classes (unless specifically made immutable)
 
+#######################################################################
+#13. Как передаются аргументы в функцию? По ссылке или по значению?
+#Ни по тому ни по другому, потому как в языке Python числа, списки, строки являются объектами.
+a = 5 #call-by-object (передача неизменяемого объекта)
+b = [1, 2, 3, 4, 5] #call-by-object-refernce (передача изменяемого объекта по объекту ссылки)
+function1(2, a, b, {'a': 1, 'b': 2}, m = (4, 4, 5))
+ b[0] = 5 #изменили первый элемент внутри функции
+print(b) #[5, 2, 3, 4, 5]
+
+#######################################################################
+#14. Есть ли ошибка?
+def is_none(arg): #Функция, которая проверяет arg является ли он None
+  if arg: 
+    return False
+  return True
+print(is_none(None)) #True
+print(is_none([])) #True (пустой список не может быть None)
+print(is_none('')) #True (пустая строка не может быть None)
+
+def is_none(arg): #Функция, которая проверяет arg является ли он None
+  if arg is not None: #Правильно так!!! в предыдущем случае происходит проверка на существование arg
+    return False
+  return True
+print(is_none(None)) #True
+print(is_none([])) #False (пустой список не может быть None)
+print(is_none('')) #False (пустая строка не может быть None)
+
+#######################################################################
+#15. Для чего нужны декораторы @staticmethod и @classmethod?
+#Декораторы - это функции обертки, которые дают возможность изменить поведение функции
+#не меняя её код
+class A
+  value = 4
+  def b(self):
+    return True
+
+a = A()
+print(A, b()) # вернет ошибку, так ка мы вызываем метод b от класса A, а не от экземпляра a
+print(a, b())
+
+class A
+  value = 4
+  @staticmethod
+  def b():
+    return True
+
+a = A()
+print(A, b()) # True
+print(a, b()) # True
 
 
+class A
+  value = 4
+  @classmethod
+  def b(cls):
+    return cls.value #Можно получить атрибут класса из метода b, который является методом класса
 
+a = A()
+print(A, b()) # 4
+print(a, b()) # 4
 
-
-
-
-
-
-
-
-
-
+#######################################################################
+#39. Чем отличаются copy.copy(x) и copy.deepcopy(x) ?
+https://www.youtube.com/watch?v=EjO8f8sZnBw&list=WL&index=3&t=0s
 
 
 
