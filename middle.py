@@ -145,6 +145,10 @@ print(list(fib(10)))
 
 
 
+#Как пройти собеседование Python программисту [GeekBrains] 
+#-> https://www.youtube.com/watch?v=EjO8f8sZnBw&list=WL&index=3&t=0s
+
+
 
 
 
